@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import Node from './Node/Node';
-import {dijkstra, getNodesInShortestPathOrder} from '../Algos/dijkstra';
+import React, { Component } from "react";
+import Node from "./Node/Node";
+import { dijkstra, getNodesInShortestPathOrder } from "../Algos/dijkstra";
 
-import './AlgoVisualizer.css';
+import "./AlgoVisualizer.css";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -20,22 +20,22 @@ export default class AlgoVisualizer extends Component {
 
   componentDidMount() {
     const grid = getInitialGrid();
-    this.setState({grid});
+    this.setState({ grid });
   }
 
   handleMouseDown(row, col) {
     const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
-    this.setState({grid: newGrid, mouseIsPressed: true});
+    this.setState({ grid: newGrid, mouseIsPressed: true });
   }
 
   handleMouseEnter(row, col) {
     if (!this.state.mouseIsPressed) return;
     const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
-    this.setState({grid: newGrid});
+    this.setState({ grid: newGrid });
   }
 
   handleMouseUp() {
-    this.setState({mouseIsPressed: false});
+    this.setState({ mouseIsPressed: false });
   }
 
   animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
@@ -49,7 +49,7 @@ export default class AlgoVisualizer extends Component {
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-visited';
+          "node node-visited";
       }, 10 * i);
     }
   }
@@ -59,13 +59,13 @@ export default class AlgoVisualizer extends Component {
       setTimeout(() => {
         const node = nodesInShortestPathOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-shortest-path';
+          "node node-shortest-path";
       }, 50 * i);
     }
   }
 
   visualizeDijkstra() {
-    const {grid} = this.state;
+    const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
@@ -74,19 +74,20 @@ export default class AlgoVisualizer extends Component {
   }
 
   render() {
-    const {grid, mouseIsPressed} = this.state;
+    const { grid, mouseIsPressed } = this.state;
 
     return (
       <>
         <button onClick={() => this.visualizeDijkstra()}>
           Visualize Dijkstra's Algorithm
         </button>
+        <button onClick={() => window.location.reload()}>Refresh</button>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
               <div key={rowIdx}>
                 {row.map((node, nodeIdx) => {
-                  const {row, col, isFinish, isStart, isWall} = node;
+                  const { row, col, isFinish, isStart, isWall } = node;
                   return (
                     <Node
                       key={nodeIdx}
@@ -100,7 +101,8 @@ export default class AlgoVisualizer extends Component {
                         this.handleMouseEnter(row, col)
                       }
                       onMouseUp={() => this.handleMouseUp()}
-                      row={row}></Node>
+                      row={row}
+                    ></Node>
                   );
                 })}
               </div>
