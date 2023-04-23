@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Node from "./Node/Node";
-import { dijkstra, getNodesInShortestPathOrder } from "../Algos/dijkstra";
+import { dijkstra, getNodesInShortestPathOrderdjk } from "../Algos/dijkstra";
+import { bfs, getNodesInShortestPathOrderbfs } from "../Algos/bfs";
 
 import "./AlgoVisualizer.css";
 
@@ -69,7 +70,7 @@ export default class AlgoVisualizer extends Component {
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    const nodesInShortestPathOrder = getNodesInShortestPathOrderdjk(finishNode);
     this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
