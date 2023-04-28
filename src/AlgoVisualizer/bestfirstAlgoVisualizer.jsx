@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import Node from "./Node/Node";
-import { dijkstra, getNodesInShortestPathOrderdjk } from "../Algos/dijkstra";
+import {
+  greedyBestFirstSearch,
+  getNodesInShortestPathOrderBestfirst,
+} from "../Algos/bestfirst";
+
 import "./AlgoVisualizer.css";
-import { NavLink } from "react-router-dom";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 35;
 
-export default class AlgoVisualizer extends Component {
+export default class BestfirstAlgoVisualizer extends Component {
   constructor() {
     super();
     this.state = {
@@ -38,7 +41,7 @@ export default class AlgoVisualizer extends Component {
     this.setState({ mouseIsPressed: false });
   }
 
-  animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
+  animateBestfirst(visitedNodesInOrder, nodesInShortestPathOrder) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -64,13 +67,18 @@ export default class AlgoVisualizer extends Component {
     }
   }
 
-  visualizeDijkstra() {
+  visualizeBestfirst() {
     const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-    const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-    const nodesInShortestPathOrder = getNodesInShortestPathOrderdjk(finishNode);
-    this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    const visitedNodesInOrder = greedyBestFirstSearch(
+      grid,
+      startNode,
+      finishNode
+    );
+    const nodesInShortestPathOrder =
+      getNodesInShortestPathOrderBestfirst(finishNode);
+    this.animateBestfirst(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
   render() {
@@ -78,12 +86,8 @@ export default class AlgoVisualizer extends Component {
 
     return (
       <>
-        <NavLink to="/dfs">
-          <button>DFS</button>
-        </NavLink>
-
-        <button onClick={() => this.visualizeDijkstra()}>
-          Visualize Dijkstra's Algorithm
+        <button onClick={() => this.visualizeBestfirst()}>
+          Visualize Greedy BestFirst Algorithm
         </button>
         <button onClick={() => window.location.reload()}>Refresh</button>
         <div className="grid">
