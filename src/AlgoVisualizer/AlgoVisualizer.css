@@ -1,6 +1,15 @@
 body{
     background: #1c1e26;
+    height: 100vh;
 }
 .grid{
-    margin: 100px;
+    margin: 100px ;
+    
+    justify-content: center;
+    
+}
+
+.Algos{
+    position: relative;
+    justify-content: right;
 }

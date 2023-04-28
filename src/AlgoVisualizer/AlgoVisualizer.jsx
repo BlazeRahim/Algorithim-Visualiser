@@ -78,14 +78,24 @@ export default class AlgoVisualizer extends Component {
 
     return (
       <>
-        <NavLink to="/dfs">
-          <button>DFS</button>
-        </NavLink>
-
-        <button onClick={() => this.visualizeDijkstra()}>
-          Visualize Dijkstra's Algorithm
-        </button>
-        <button onClick={() => window.location.reload()}>Refresh</button>
+        <div style={{ background: "#FFF" }}>
+          <button onClick={() => this.visualizeDijkstra()}>
+            Visualize Dijkstra's Algorithm
+          </button>
+          <button onClick={() => window.location.reload()}>Refresh</button>
+          <NavLink className="Algos" to="/dfs">
+            <button className="Algos">DFS</button>
+          </NavLink>
+          <NavLink className="Algos" to="/bfs">
+            <button className="Algos">BFS</button>
+          </NavLink>
+          <NavLink className="Algos" to="/astar">
+            <button className="Algos">A*</button>
+          </NavLink>
+          <NavLink className="Algos" to="/bestfirst">
+            <button className="Algos">BestFirst</button>
+          </NavLink>
+        </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
