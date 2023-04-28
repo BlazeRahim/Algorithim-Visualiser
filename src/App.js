@@ -1,11 +1,12 @@
 import React from "react";
-import AlgoVisualizer from "./AlgoVisualizer/AlgoVisualizer";
+// import AlgoVisualizer from "./AlgoVisualizer/AlgoVisualizer";
+import DfsAlgoVisualizer from "./AlgoVisualizer/aStarAlgoVisualizer";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <AlgoVisualizer></AlgoVisualizer>
+      <DfsAlgoVisualizer></DfsAlgoVisualizer>
     </div>
   );
 }

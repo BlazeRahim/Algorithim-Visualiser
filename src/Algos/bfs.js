@@ -3,7 +3,7 @@ export function bfs(grid, startNode, finishNode) {
   const queue = [startNode];
   startNode.isVisited = true;
 
-  while (queue.length) {
+  while (queue.length > 0) {
     const currentNode = queue.shift();
     visitedNodesInOrder.push(currentNode);
 
@@ -12,6 +12,7 @@ export function bfs(grid, startNode, finishNode) {
     }
 
     const unvisitedNeighbors = getUnvisitedNeighbors(currentNode, grid);
+
     for (const neighbor of unvisitedNeighbors) {
       neighbor.isVisited = true;
       neighbor.previousNode = currentNode;

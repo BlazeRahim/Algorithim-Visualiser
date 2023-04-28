@@ -1,45 +1,26 @@
-export function astar(grid, startNode, finishNode) {
+export function dfs(grid, startNode, finishNode) {
   const visitedNodesInOrder = [];
-  startNode.distance = 0;
-  startNode.fScore = heuristic(startNode, finishNode);
-  const openSet = [startNode];
+  const stack = [startNode];
+  startNode.isVisited = true;
 
-  while (openSet.length > 0) {
-    sortNodesByFScore(openSet);
-    const currentNode = openSet.shift();
+  while (stack.length > 0) {
+    const currentNode = stack.pop();
     visitedNodesInOrder.push(currentNode);
 
     if (currentNode === finishNode) {
       return visitedNodesInOrder;
     }
 
-    currentNode.isVisited = true;
-
     const unvisitedNeighbors = getUnvisitedNeighbors(currentNode, grid);
+
     for (const neighbor of unvisitedNeighbors) {
-      const tentativeGScore = currentNode.distance + 1;
-      if (tentativeGScore < neighbor.distance) {
-        neighbor.previousNode = currentNode;
-        neighbor.distance = tentativeGScore;
-        neighbor.fScore = tentativeGScore + heuristic(neighbor, finishNode);
-        if (!openSet.includes(neighbor)) {
-          openSet.push(neighbor);
-        }
-      }
+      neighbor.isVisited = true;
+      neighbor.previousNode = currentNode;
+      stack.push(neighbor);
     }
   }
 
   return visitedNodesInOrder;
-}
-
-function heuristic(nodeA, nodeB) {
-  const dx = Math.abs(nodeA.col - nodeB.col);
-  const dy = Math.abs(nodeA.row - nodeB.row);
-  return dx + dy;
-}
-
-function sortNodesByFScore(nodes) {
-  nodes.sort((nodeA, nodeB) => nodeA.fScore - nodeB.fScore);
 }
 
 function getUnvisitedNeighbors(node, grid) {
@@ -55,8 +36,8 @@ function getUnvisitedNeighbors(node, grid) {
 }
 
 // Backtracks from the finishNode to find the shortest path.
-// Only works when called *after* the astar method above.
-export function getNodesInShortestPathOrderAstar(finishNode) {
+// Only works when called *after* the dfs method above.
+export function getNodesInShortestPathOrderdfs(finishNode) {
   const nodesInShortestPathOrder = [];
   let currentNode = finishNode;
   while (currentNode !== null) {

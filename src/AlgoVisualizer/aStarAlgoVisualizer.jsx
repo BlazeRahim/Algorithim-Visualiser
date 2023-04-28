@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Node from "./Node/Node";
-import { dijkstra, getNodesInShortestPathOrderdjk } from "../Algos/dijkstra";
+import { astar, getNodesInShortestPathOrderAstar } from "../Algos/Astar";
 
 import "./AlgoVisualizer.css";
 
@@ -9,7 +9,7 @@ const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 35;
 
-export default class AlgoVisualizer extends Component {
+export default class aStarAlgoVisualizer extends Component {
   constructor() {
     super();
     this.state = {
@@ -38,7 +38,7 @@ export default class AlgoVisualizer extends Component {
     this.setState({ mouseIsPressed: false });
   }
 
-  animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
+  animateAstar(visitedNodesInOrder, nodesInShortestPathOrder) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -64,13 +64,14 @@ export default class AlgoVisualizer extends Component {
     }
   }
 
-  visualizeDijkstra() {
+  visualizeAstar() {
     const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-    const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-    const nodesInShortestPathOrder = getNodesInShortestPathOrderdjk(finishNode);
-    this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    const visitedNodesInOrder = astar(grid, startNode, finishNode);
+    const nodesInShortestPathOrder =
+      getNodesInShortestPathOrderAstar(finishNode);
+    this.animateAstar(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
   render() {
@@ -78,8 +79,8 @@ export default class AlgoVisualizer extends Component {
 
     return (
       <>
-        <button onClick={() => this.visualizeDijkstra()}>
-          Visualize Dijkstra's Algorithm
+        <button onClick={() => this.visualizeAstar()}>
+          Visualize A* Algorithm
         </button>
         <button onClick={() => window.location.reload()}>Refresh</button>
         <div className="grid">
