@@ -9,7 +9,16 @@ body{
     
 }
 
-.Algos{
-    position: relative;
-    justify-content: right;
+.navbar{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    justify-content: space-between;
+}
+
+.navitems{
+    float: right;
+    justify-content: space-between;
+    
 }

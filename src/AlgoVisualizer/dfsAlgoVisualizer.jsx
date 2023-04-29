@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Node from "./Node/Node";
 import { dfs, getNodesInShortestPathOrderdfs } from "../Algos/dfs";
-
+import { NavLink } from "react-router-dom";
 import "./AlgoVisualizer.css";
 
 const START_NODE_ROW = 10;
@@ -78,10 +78,29 @@ export default class DfsAlgoVisualizer extends Component {
 
     return (
       <>
-        <button onClick={() => this.visualizebfs()}>
-          Visualize BFS's Algorithm
-        </button>
-        <button onClick={() => window.location.reload()}>Refresh</button>
+        <div style={{ background: "#FFF" }}>
+          <button className="Algovisual" onClick={() => this.visualizebfs()}>
+            Visualize DFS's Algorithm
+          </button>
+          <button onClick={() => window.location.reload()}>Refresh</button>
+          <ul className="navbar">
+            <li className="navitems">
+              <NavLink className="Algos" to="/">
+                <button className="Algos">Dijkstra</button>
+              </NavLink>
+            </li>
+            <li className="navitems">
+              <NavLink className="Algos" to="/bfs">
+                <button className="Algos">BFS</button>
+              </NavLink>
+            </li>
+            <li className="navitems">
+              <NavLink className="Algos" to="/astar">
+                <button className="Algos">A*</button>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (

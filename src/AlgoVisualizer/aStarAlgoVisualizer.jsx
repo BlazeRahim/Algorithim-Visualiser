@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Node from "./Node/Node";
 import { astar, getNodesInShortestPathOrderAstar } from "../Algos/Astar";
-
+import { NavLink } from "react-router-dom";
 import "./AlgoVisualizer.css";
 
 const START_NODE_ROW = 10;
@@ -79,10 +79,29 @@ export default class aStarAlgoVisualizer extends Component {
 
     return (
       <>
-        <button onClick={() => this.visualizeAstar()}>
-          Visualize A* Algorithm
-        </button>
-        <button onClick={() => window.location.reload()}>Refresh</button>
+        <div style={{ background: "#FFF" }}>
+          <button onClick={() => this.visualizeAstar()}>
+            Visualize A* Algorithm
+          </button>
+          <button onClick={() => window.location.reload()}>Refresh</button>
+          <ul className="navbar">
+            <li className="navitems">
+              <NavLink className="Algos" to="/">
+                <button className="Algos">Dijkstra</button>
+              </NavLink>
+            </li>
+            <li className="navitems">
+              <NavLink className="Algos" to="/bfs">
+                <button className="Algos">BFS</button>
+              </NavLink>
+            </li>
+            <li className="navitems">
+              <NavLink className="Algos" to="/dfs">
+                <button className="Algos">DFS</button>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
