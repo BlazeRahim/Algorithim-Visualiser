@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import Node from "./Node/Node";
 import {
   greedyBestFirstSearch,
-  getNodesInShortestPathOrderBestfirst,
+  updateUnvisitedNeighborsGBFS,
 } from "../Algos/bestfirst";
-
 import "./AlgoVisualizer.css";
 
 const START_NODE_ROW = 10;
@@ -76,8 +75,7 @@ export default class BestfirstAlgoVisualizer extends Component {
       startNode,
       finishNode
     );
-    const nodesInShortestPathOrder =
-      getNodesInShortestPathOrderBestfirst(finishNode);
+    const nodesInShortestPathOrder = updateUnvisitedNeighborsGBFS(finishNode);
     this.animateBestfirst(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 

@@ -1,4 +1,4 @@
-function greedyBestFirstSearch(grid, startNode, finishNode) {
+export function greedyBestFirstSearch(grid, startNode, finishNode) {
   const visitedNodesInOrder = [];
   startNode.distance = 0;
   const unvisitedNodes = [startNode];
